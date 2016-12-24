@@ -1,11 +1,16 @@
 ---
+- name: Add apt repository
+  apt_repository: repo='ppa:jonathonf/vim' state=present
+
 - name: update apt
-  apt: name={{ item }} cache_valid_time=3600 state=latest update_cache=yes
+  apt: name={{ item }} cache_valid_time=0 state=latest update_cache=yes
   sudo: yes
   with_items:
     - zsh
     - git
     - vim
+    - vim-nox
+    - vim-nox-py2
     - ctags
     - build-essential
     - cmake
