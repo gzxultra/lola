@@ -1,0 +1,26 @@
+---
+- name: vim
+  apt: name={{ item }} cache_valid_time=3600 state=installed update_cache=yes
+  sudo: yes
+  with_items:
+    - vim
+    - ctag
+    - build-essential
+    - cmake
+    - python-dev
+    - silversearcher-ag
+    - python-pip
+
+- name: pip
+  pip: name={{ item }} cache_valid_time=3500 state=installed update_cache=yes
+  sudo: yes
+  with_items:
+    - pyflakes
+    - pylint
+    - pep8
+
+- name: get k-vim
+  git: repo=https://github.com/wklken/k-vim.git /root/k-vim
+
+- name: install k-vim
+  command: sh -x /root/k-vim/install.sh
