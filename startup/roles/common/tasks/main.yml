@@ -37,6 +37,9 @@
   when: cloning|success
   sudo: no
 
+- name: Set zsh as default shell
+  shell: chsh -s /usr/bin/zsh
+
 - name: Download pip files
   get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/root/get-pip.py
 
