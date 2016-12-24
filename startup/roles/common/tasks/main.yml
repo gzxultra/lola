@@ -1,0 +1,48 @@
+---
+- name: update apt
+  apt: name={{ item }} cache_valid_time=3600 state=latest update_cache=yes
+  sudo: yes
+  with_items:
+    - zsh
+    - git
+    - vim
+    - ctag
+    - build-essential
+    - cmake
+    - python-dev
+    - silversearcher-ag
+
+- name: Backing up existing ~/.zshrc
+  shell: if [ -f ~/.zshrc ]; then mv ~/.zshrc{,.orig}; fi
+  when: installation|success
+  sudo: no
+
+- name: Cloning  oh-my-zsh
+  git:
+    repo=https://github.com/robbyrussell/oh-my-zsh
+    dest=~/.oh-my-zsh
+  when: installation|success
+  register: cloning
+  sudo: no
+
+- name: Creating new ~/.zshrc
+  copy:
+    src=~/.oh-my-zsh/templates/zshrc.zsh-template
+    dest=~/.zshrc
+  when: cloning|success
+  sudo: no
+
+- name: Download pip files
+  get_url: url=https://bootstrap.pypa.io/get-pip.py /root/get-pip.py
+
+- name: Install pip
+  shell: python /root/get-pip.py 
+
+- name: Install pip packages 
+  pip: name={{ item }} cache_valid_time=3500 state=installed update_cache=yes
+  sudo: yes
+  with_items:
+    - pyflakes
+    - pylint
+    - pep8
+
