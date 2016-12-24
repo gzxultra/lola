@@ -16,6 +16,17 @@
     - cmake
     - python-dev
     - silversearcher-ag
+    - tmux
+    - automake
+    - bison
+    - flex
+    - g++
+    - libboost1.55-all-dev
+    - libevent-dev
+    - libssl-dev
+    - libtool
+    - make
+    - pkg-config
   register: installation
 
 - name: Backing up existing ~/.zshrc
@@ -53,4 +64,4 @@
     - pyflakes
     - pylint
     - pep8
-
+    - virtualenv
