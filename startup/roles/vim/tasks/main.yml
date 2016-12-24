@@ -1,6 +1,6 @@
 ---
 - name: get k-vim
-  git: repo=https://github.com/wklken/k-vim.git /root/k-vim
+  git: repo=https://github.com/wklken/k-vim.git dest=/root/k-vim
 
 - name: install k-vim
   command: sh -x /root/k-vim/install.sh
