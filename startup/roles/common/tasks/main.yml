@@ -1,4 +1,12 @@
 ---
+- name: Update apt cache
+  apt: update-cache=yes cache_valid_time=86400
+  sudo: yes
+
+- name: Update all packages
+  apt: upgrade=dist
+  sudo: yes
+
 - name: Add apt repository
   apt_repository: repo='ppa:jonathonf/vim' state=present
 
@@ -9,6 +17,8 @@
     - zsh
     - git
     - vim
+    - htop
+    - curl
     - vim-nox
     - vim-nox-py2
     - ctags
@@ -28,6 +38,10 @@
     - make
     - pkg-config
   register: installation
+
+- name: Ensure that ansible_cache_dir directory exists
+  file: path={{ ansible_cache_dir }} state=directory
+  sudo: yes
 
 - name: Backing up existing ~/.zshrc
   shell: if [ -f ~/.zshrc ]; then mv ~/.zshrc .zshrc.origin; fi

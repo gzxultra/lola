@@ -1,5 +1,5 @@
 ---
-- name: init_server 
+- name: init_server
   hosts: all
   remote_user: root
   # remote_user: user
