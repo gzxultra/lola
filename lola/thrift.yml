@@ -1,0 +1,8 @@
+---
+- name: Create Thrift dev env
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
+    - thrift

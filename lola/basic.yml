@@ -1,0 +1,8 @@
+---
+- name: Create basic dev env
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
+    - vim
